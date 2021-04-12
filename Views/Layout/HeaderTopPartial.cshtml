@@ -1,0 +1,36 @@
+﻿@using Ecommerce.Models
+<div class="header-top">
+    <div class="container">
+        <div class="search">
+            <form>
+                <input type="text" value="Search " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                <input type="submit" value="Go">
+            </form>
+        </div>
+        <div class="header-left">
+
+            <ul>
+                @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] != "")
+                {
+                    ThanhVien tv = (ThanhVien)Session["TaiKhoan"];
+                    <li class="total" style="font-size:16;margin-right:12;color:aliceblue">Hi @tv.HoTen</li>
+                    <li style="text-decoration: none; font-size :15; margin-right: -1.5em;color:aliceblue"> @Html.ActionLink("Đăng Xuất", "DangXuat", "Home")</li>
+                }
+                else
+                {
+                    <li><a id="btnDangnhap" class="lock" href="@Url.Action("DangNhap","Home")">Đăng nhập</a></li>
+                    <li><a class="lock" href="@Url.Action("DangKy","Home")">Đăng Ký</a></li>
+                }
+
+            </ul>
+
+
+            @*IconGioHangPartialView*@
+            @Html.Action("IconGioHangPartial", "GioHang")
+
+
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>

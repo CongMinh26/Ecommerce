@@ -1,0 +1,82 @@
+﻿@using Ecommerce.Models
+@model CartItem
+
+
+@{
+    ViewBag.Title = "SuaGioHang";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+}
+
+@{
+    //lấy dữ liệu từ viewbag
+    List<CartItem> listCart = ViewBag.GioHang as List<CartItem>;
+}
+
+
+<div class="col-md-9 product-price">
+    <table class="table">
+        <tr>
+            <td>Mã sản phẩm </td>
+            <td>Tên sản phẩm</td>
+            <td>Hình ảnh </td>
+            <td>Số lượng</td>
+            <td>Đơn giá </td>
+            <td>Thành tiền</td>
+            <td>Tổng tiền</td>
+        </tr>
+        @foreach (var item in listCart)
+        {
+            // tìm th cần sửa thì sửa
+            if (Model.MaSP == item.MaSP)
+            {
+                <tr>
+                    <td>@item.MaSP @Html.Hidden("MaSP", item.MaSP)</td>
+
+                    <td>@item.TenSP </td>
+
+                    <td><img src="@Url.Content("~/Content/images/"+item.HinhAnh)" style="height:50px;width:50px" /> </td>
+
+                    @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @MaSP = item.MaSP, @soluong = item.SoLuong }))
+                    {
+                        <td>@Html.TextBox("SoLuong", @item.SoLuong, new { @class = "soLuongThayDoi"})
+                            <p id="TB_Loi"></p>
+                        </td>
+
+                        <td>@item.DonGia.ToString("#,##") </td>
+
+                        <td>@item.ThanhTien.ToString("#,##") </td>
+
+                        <td><input type="submit" value="Cập Nhật" id="btnCapNhatGioHang" /></td>
+                    }
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>@item.MaSP</td>
+                    <td>@item.TenSP </td>
+                    <td><img src="@Url.Content("~/Content/images/"+item.HinhAnh)" style="height:50px;width:50px" /> </td>
+                    <td>@item.SoLuong</td>
+                    <td>@item.DonGia.ToString("#,##") </td>
+                    <td>@item.ThanhTien.ToString("#,##") </td>
+                    <td>
+                        @Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP })
+                        @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP })
+                    </td>
+                </tr>
+
+            }
+        }
+    </table>
+</div>
+
+@*Kiểm tra số lượng*@
+<script>
+    $("#btnCapNhatGioHang").click(function () {
+        var number = $(".soLuongThayDoi").val();
+        if (isNaN(number) == true || number <= 0) {
+            $("#TB_Loi").text("Số lượng không hợp lệ");
+            return false;
+        }
+    });
+</script>

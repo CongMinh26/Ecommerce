@@ -1,0 +1,57 @@
+﻿@using CaptchaMvc.HtmlHelpers;
+@using CaptchaMvc;
+
+@using Ecommerce.Models;
+@model ThanhVien
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+}
+
+<!--content-->
+<div class="container">
+    <div class=" register">
+        @using (Html.BeginForm())
+        {
+            <div class="col-md-6 register-top-grid">
+                <h3>Đăng ký thành viên</h3>
+
+                <div>
+                    <span>Họ tên</span>
+                    @Html.TextBox("HoTen")
+                </div>
+                <div>
+                    <span>Tài khoản</span>
+                    @Html.TextBox("TaiKhoan")
+                </div>
+                <div>
+                    <span>Email </span>
+                    @Html.TextBox("Email")
+                </div>
+
+            </div>
+            <div class="col-md-6 register-bottom-grid">
+                <div>
+                    <span>Địa chỉ</span>
+                    @Html.TextBox("DiaChi")
+                </div>
+                <div>
+                    <span>Mật khẩu</span>
+                    @Html.Password("MatKhau")
+                </div>
+                <div>
+                    <span>Nhập lại mật khẩu</span>
+                    @Html.Password("NhapLaiMatKhau")
+                </div>
+
+                <div>@Html.MathCaptcha()</div>
+                <br />
+
+                <input type="submit" value="Đăng Ký">
+            </div>
+            <div class="clearfix"> </div>
+        }
+    </div>
+</div>
+<h1 style="color: red">@ViewBag.ThongBao</h1>

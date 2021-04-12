@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+
+
+}
+
+<div class="container">
+    <div class="account">
+        <h1>Account</h1>
+        <div class="account-pass">
+            <div class="col-md-8 account-top">
+                @using (Html.BeginForm(@Url.Action("DangNhap", "Home")))
+                {
+                    <div>
+                        <span>Tài khoản</span>
+                       @Html.TextBox("TaiKhoan")
+                    </div>
+                    <div>
+                        <span>Password</span>
+                        @Html.TextBox("MatKhau")
+                    </div>
+                    <input type="submit" value="Đăng nhập">
+                }
+            </div>
+            <div class="col-md-4 left-account ">
+                <a href="single.html"><img class="img-responsive " src="images/s1.jpg" alt=""></a>
+                <div class="five">
+                    <h2>25% </h2><span>Giảm giá</span>
+                </div>
+                <a href="@Url.Action("DangKy","Home")" class="create">Tạo tài khoản</a>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,34 @@
+﻿@using Ecommerce.Models;
+@model IEnumerable<SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+@* Bước 1:Tách code ra  *@
+
+@{
+    IEnumerable<SanPham> ldt = ViewBag.ListDT as IEnumerable<SanPham>;
+    IEnumerable<SanPham> llt = ViewBag.ListLT as IEnumerable<SanPham>;
+    IEnumerable<SanPham> lpc = ViewBag.ListPC as IEnumerable<SanPham>;
+}
+
+@* Bước 2 PartialView *@
+<div class="content-top">
+    <div class="grid-in">
+        <div class="container">
+            @Html.Partial("~/Views/SanPham/SanPhamStyle1Partial.cshtml", ldt)
+        </div>
+    </div>
+
+    <div class="grid-in">
+        <div class="container">
+            @Html.Partial("~/Views/SanPham/SanPhamStyle2Partial.cshtml", llt)
+        </div>
+    </div>
+</div>
+
+
+
+
+

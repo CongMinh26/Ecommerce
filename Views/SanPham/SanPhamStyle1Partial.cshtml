@@ -1,0 +1,29 @@
+﻿@using Ecommerce.Models;
+@model IEnumerable<SanPham>
+
+<div class="content-top">
+  
+    <h1>@Model.First().LoaiSanPham.TenLoai</h1>
+    <div class="grid-in">
+        @foreach (var item in Model)
+        {
+
+        <div class="col-md-4 grid-top">
+            <a href="@Url.Action("ChiTietSanPham","SanPham",new { id=item.MaSP})" class="b-link-stripe b-animate-go  thickbox">
+                <img class="img-responsive" src="@Url.Content("~/Content/images/"+item.HinhAnh)" alt="">
+                <div class="b-wrapper">
+                    <h3 class="b-animate b-from-left    b-delay03 " style="text-align:left;font-size:15pt;" >
+                        <span style="text-align: left;position:absolute;top:1%;left:1%;font-size:20pt">@item.CauHinh</span>
+                    </h3>
+                </div>
+            </a>
+
+
+            <p><a href="single.html">@item.TenSP</a></p>
+        </div>
+        }
+        <div class="clearfix"> </div> @*đủ hàng thì cho xuống dòng*@
+    </div>
+ 
+</div>
+<!----->
