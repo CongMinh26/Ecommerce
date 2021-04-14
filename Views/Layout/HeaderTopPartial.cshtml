@@ -1,11 +1,13 @@
 ﻿@using Ecommerce.Models
 <div class="header-top">
     <div class="container">
-        <div class="search">
-            <form>
-                <input type="text" value="Search " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-                <input type="submit" value="Go">
-            </form>
+        <div class="search" style=" height: 30px;  margin-top: 0px;
+">
+            @using(Html.BeginForm("LayTuKhoa", "TimKiem"))
+            {
+                <input type="text" name="TuKhoa" value="Tìm Kiếm" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Tìm kiếm';}">
+                <input type="submit" value="Tìm Kiếm">
+            }
         </div>
         <div class="header-left">
 

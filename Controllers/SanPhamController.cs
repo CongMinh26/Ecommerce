@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,8 @@ namespace Ecommerce.Controllers
 
 
         // Xây dựng Acction load Sản Phẩm theo Mã Loại SX, Mã nhà sản xuất
-        public ActionResult SanPham(int ? MaLoaiSP, int ? MaNSX)
+        [HttpGet]
+        public ActionResult SanPham(int ? MaLoaiSP, int ? MaNSX, int ? page)
         {
             if( MaLoaiSP == null || MaNSX == null)
             {
@@ -55,7 +57,20 @@ namespace Ecommerce.Controllers
             {
                 return HttpNotFound();
             }
-            return View(list_sp);
+
+            // Thực hiện chức năng phân trang
+            if(Request.HttpMethod != "GET")
+            {
+                page = 1;
+            }
+            // tạo biến sp trên trang
+            int pageSize = 6;
+            // tạo biến số trang hiện tại
+            int pageNumber = (page ?? 1);
+            ViewBag.MaLoaiSP = MaLoaiSP;
+            ViewBag.MaNSX = MaNSX;
+
+            return View(list_sp.OrderBy(n=>n.MaSP).ToPagedList(pageNumber, pageSize));
         }
     }
 }
