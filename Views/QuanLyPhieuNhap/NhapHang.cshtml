@@ -1,0 +1,145 @@
+﻿@using Ecommerce.Models;
+@model PhieuNhap
+@{
+    ViewBag.Title = "Nhập hàng";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+@{
+    IEnumerable<NhaCungCap> listNCC = ViewBag.MaNCC as IEnumerable<NhaCungCap>;
+}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+</script>
+
+<section class="wrapper">
+
+    @using (Html.BeginForm("NhapHang","QuanLyPhieuNhap", FormMethod.Post))
+    {
+        <div class="row ">
+            <div class="Thongtinphieunhap col-md-12">
+                <div class="col-md-2">Nhà cung cấp</div>
+                <div class="col-md-8">
+                    <select class="MaNCC" name="MaNCC">
+                        @foreach (var item in listNCC)
+                        {
+                            <option value="@item.MaNCC">@item.TenNCC</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <br />
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="col-md-2">Ngày nhập</div>
+                <div class="col-md-8">
+                    <input name="NgayNhap" class="date" id="datepicker" />
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <br /> <br /> <br />
+                      <table class="table tblchitietphieunhap">
+                          @{ IEnumerable<SanPham> listSP = ViewBag.ListSP as IEnumerable<SanPham>;}
+
+
+
+                          <tr class="trAppend" style="display:none">
+                              <td>
+                                  <select name="listSP" class="ddlSP">
+                                      @foreach (var itemsp in listSP)
+                                      {
+                                          <option value="@itemsp.MaSP">@itemsp.TenSP</option>
+                                      }
+                                  </select>
+                              </td>
+                              <td>
+                                  <input value="0" name="" class="txtDonGia" />
+                              </td>
+                              <td>
+                                  <input value="0" name="" class="txtSoLuong" />
+                              </td>
+                              <td>
+                                  <input type="button" value="-" name="" class="btn-danger btnDelete btn" />
+                              </td>
+                          </tr>
+                          <tr class="tr_FirstChild" data-id="-1">
+                              <td>Sản phẩm</td>
+                              <td>Đơn giá</td>
+                              <td>Số lượng</td>
+                          </tr>
+
+                      </table>
+
+        <input type="button" value="+" class="btn btn-success" id="btnAdd" />
+
+        <input type="submit" value="Nhập hàng" class="btn btn-success" id="btnNhaphang" />
+        }
+</section>
+<script>
+
+    // xử lý xự kiện thêm
+    $("#btnAdd").click(function () {
+
+        // B4:Tìm đến thẻ nào đó: ở đây là tr(:last-child) là thẻ end trong table
+        var id_end = $(".tblchitietphieunhap").find("tr:last-child").attr("data-id");
+        i = parseInt(id_end) + 1;
+        
+        // B1: lấy nội dung trong tr html
+        var td_noidung = $(".trAppend").html();
+        // B2: tạo thẻ tr bao lại những dữ liệu vừa lấy
+        var tr_noidung = "<tr class=\"trAppend\" data-id=\"" + i + "\">" + td_noidung + "</tr>";
+        // b3: thêm vào table
+        $(".tblchitietphieunhap").append(tr_noidung);
+        loadIDLenThe();
+    });
+
+
+
+
+    // phương thức xử lý thuộc tính attr từ thẻ tr gán xuống chỉ số phần tử các trong thuộc tính name của thẻ input
+    function loadIDLenThe() {
+        $(".trAppend").each(function () {
+            // lấy thuộc tính data-id của thẻ tr hiện tại
+            var id = $(this).attr("data-id");
+            var nameMaSanPham = "[" + id + "].MaSP"; // tạo ra mã sản phẩm
+            var nameSoLuongNhap = "[" + id + "].SoLuong"; // tạo ra đơn giá nhập
+            var nameDonGia = "[" + id + "].DonGia"; // tạo đơn giá
+            $(this).find(".ddlSP").attr("name", nameMaSanPham); // gán name cho dropdownlist
+            $(this).find(".txtDonGia").attr("name", nameDonGia); // gán name đơn giá nhập
+            $(this).find(".txtSoLuong").attr("name", nameSoLuongNhap);// gán name cho số lượng nhập
+
+        })
+    }
+
+    // phương thức cập nhật lại id
+    function CapNhatID() {
+
+        var id_end = $(".tblchitietphieunhap").find(".tr_FirstChild").attr("data-id");
+        i = parseInt(id_end) + 1;
+        alert(id_end);
+        $(".trAppend").each(function () {
+            var id = i;
+            $(this).attr("data-id", i);
+            var nameMaSanPham = "[" + id + "].MaSP"; // tạo ra mã sản phẩm
+            var nameSoLuongNhap = "[" + id + "].SoLuong"; // tạo ra đơn giá nhập
+            var nameDonGia = "[" + id + "].DonGia"; // tạo đơn giá
+            $(this).find(".ddlSP").attr("name", nameMaSanPham); // gán name cho dropdownlist
+            $(this).find(".txtDonGia").attr("name", nameDonGia); // gán name đơn giá nhập
+            $(this).find(".txtSoLuong").attr("name", nameSoLuongNhap);// gán name cho số lượng nhập
+            i++;
+        })
+    }
+    // xử lý sự kiện xóa, ủy quyền
+    $("body").delegate(".btnDelete", "click", function () {
+        $(this).closest(".trAppend").remove();
+        CapNhatID();
+    });
+</script>
