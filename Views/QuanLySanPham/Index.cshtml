@@ -7,6 +7,10 @@
 }
 
 <section class="wrapper">
+    <div class=" btn" style=" background-color: green;color:aliceblue; margin-bottom: 10px" >
+        <a href="@Url.Action("TaoMoi","QuanLySanPham")" style="font-weight:bold; color: aliceblue">Thêm mới</a>
+    </div>
+    <br />
     @webGrid.GetHtml(
         tableStyle: "gridTable",
         headerStyle: "gridHead",
@@ -18,7 +22,9 @@
             webGrid.Column("TenSP", "Tên"),
             webGrid.Column("HinhAnh", "Hình Ảnh", format: p => Html.Raw("<img src = \"../Content/images/" + p.HinhAnh + "\" >")),
             webGrid.Column("DonGia", "Giá"),
-            webGrid.Column("SoLuongTon", "Số Lượng")
+            webGrid.Column("SoLuongTon", "Số Lượng"),
+            webGrid.Column(format: p=> Html.ActionLink("Chỉnh sửa","ChinhSua",new { id = p.MaSP})),
+            webGrid.Column(format: p=> Html.ActionLink("Xóa","Xoa",new { id = p.MaSP}))
         )
     )
     <style>
@@ -38,6 +44,7 @@
 
         .gridFooter {
             font-weight: bold
+
         }
 
         .gridRow {
