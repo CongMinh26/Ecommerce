@@ -262,22 +262,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <span>Quản Lý Sản Phẩm</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="@Url.Action("NhapHang","QuanLyPhieuNhap")">
-                                <i class="fa fa-bullhorn"></i>
-                                <span>Quản Lý Nhập Hàng</span>
-                            </a>
-                        </li>
+                        @*<li>
+            <a href="@Url.Action("NhapHang","QuanLyPhieuNhap")">
+                <i class="fa fa-bullhorn"></i>
+                <span>Quản Lý Nhập Hàng</span>
+            </a>
+        </li>*@
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-book"></i>
-                                <span>UI Elements</span>
+                                <span>Quản Lý Nhập Hàng</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="typography.html">Typography</a></li>
-                                <li><a href="glyphicon.html">glyphicon</a></li>
-                                <li><a href="grids.html">Grids</a></li>
+                                <li><a href="@Url.Action("NhapHang","QuanLyPhieuNhap")">Nhập hàng</a></li>
+                                <li><a href="@Url.Action("ListSanPhamGanHet","QuanLyPhieuNhap")">Sản phẩm gần hết</a></li>
+
                             </ul>
+                        </li>
+                        <li>
+                            <a class="active" href="@Url.Action("ChuaThanhToan","QuanLyDonHang")">
+                                <i class="fa fa-tasks"></i>
+                                <span>Quản Lý Đơn Hàng</span>
+                            </a>
                         </li>
 
                         <li class="sub-menu">

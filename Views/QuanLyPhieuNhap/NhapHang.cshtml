@@ -40,7 +40,7 @@
             <div class="col-md-12">
                 <div class="col-md-2">Ngày nhập</div>
                 <div class="col-md-8">
-                    <input name="NgayNhap" class="date" id="datepicker" />
+                    <input name="NgayNhap" type="text" class="date" id="datepicker" />
                 </div>
             </div>
         </div>
@@ -101,17 +101,14 @@
         loadIDLenThe();
     });
 
-
-
-
     // phương thức xử lý thuộc tính attr từ thẻ tr gán xuống chỉ số phần tử các trong thuộc tính name của thẻ input
     function loadIDLenThe() {
         $(".trAppend").each(function () {
             // lấy thuộc tính data-id của thẻ tr hiện tại
             var id = $(this).attr("data-id");
             var nameMaSanPham = "[" + id + "].MaSP"; // tạo ra mã sản phẩm
-            var nameSoLuongNhap = "[" + id + "].SoLuong"; // tạo ra đơn giá nhập
-            var nameDonGia = "[" + id + "].DonGia"; // tạo đơn giá
+            var nameSoLuongNhap = "[" + id + "].SoLuongNhap"; // tạo ra đơn giá nhập
+            var nameDonGia = "[" + id + "].DonGiaNhap"; // tạo đơn giá
             $(this).find(".ddlSP").attr("name", nameMaSanPham); // gán name cho dropdownlist
             $(this).find(".txtDonGia").attr("name", nameDonGia); // gán name đơn giá nhập
             $(this).find(".txtSoLuong").attr("name", nameSoLuongNhap);// gán name cho số lượng nhập
@@ -124,13 +121,12 @@
 
         var id_end = $(".tblchitietphieunhap").find(".tr_FirstChild").attr("data-id");
         i = parseInt(id_end) + 1;
-        alert(id_end);
         $(".trAppend").each(function () {
             var id = i;
             $(this).attr("data-id", i);
             var nameMaSanPham = "[" + id + "].MaSP"; // tạo ra mã sản phẩm
-            var nameSoLuongNhap = "[" + id + "].SoLuong"; // tạo ra đơn giá nhập
-            var nameDonGia = "[" + id + "].DonGia"; // tạo đơn giá
+            var nameSoLuongNhap = "[" + id + "].SoLuongNhap"; // tạo ra đơn giá nhập
+            var nameDonGia = "[" + id + "].DonGiaNhap"; // tạo đơn giá
             $(this).find(".ddlSP").attr("name", nameMaSanPham); // gán name cho dropdownlist
             $(this).find(".txtDonGia").attr("name", nameDonGia); // gán name đơn giá nhập
             $(this).find(".txtSoLuong").attr("name", nameSoLuongNhap);// gán name cho số lượng nhập
@@ -142,4 +138,41 @@
         $(this).closest(".trAppend").remove();
         CapNhatID();
     });
+
+
+    // kiểm tra dữ liệu đầu vào
+    $("#btnNhaphang").click(function () {
+        if (kiemtradongia() == false) {
+            alert("Đơn giá ko hợp lệ");
+            return false;
+        }
+        if (kiemtrasoluong() == false) {
+            alert("Số lượng ko hợp lệ");
+            return false;
+        }
+    })
+    //kiểm tra số
+    function kiemtradongia() {
+        var bool = true;
+        $(".txtDonGia").each(function () {
+            var input = $(this).val();
+            if (isNaN(input) == true || input < 0) {
+                bool = false;
+                return bool;
+            }
+        })
+        return bool;
+    }
+
+    function kiemtrasoluong() {
+        var bool = true;
+        $(".txtSoLuong").each(function () {
+            var input = $(this).val();
+            if (isNaN(input) == true || input < 0) {
+                bool = false;
+                return bool;
+            }
+        })
+        return bool;
+    }
 </script>
