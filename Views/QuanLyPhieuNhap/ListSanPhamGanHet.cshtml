@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Ecommerce.Models.SanPham>
+@{
+    ViewBag.Title = "ListSanPhamGanHet";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    WebGrid webGrid = new WebGrid(source: Model, rowsPerPage: 10);
+}
+
+<section class="wrapper">
+    <div class=" btn" style=" background-color: green;color:aliceblue; margin-bottom: 10px">
+        @*<a href="@Url.Action("TaoMoi","QuanLySanPham")" style="font-weight:bold; color: aliceblue">Thêm mới</a>*@
+    </div>
+    <br />
+    @webGrid.GetHtml(
+        tableStyle: "gridTable",
+        headerStyle: "gridHead",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: webGrid.Columns(
+            webGrid.Column("MaSP", "Mã"),
+            webGrid.Column("TenSP", "Tên"),
+            webGrid.Column("HinhAnh", "Hình Ảnh", format: p => Html.Raw("<img src = \"../Content/images/" + p.HinhAnh + "\" >")),
+            webGrid.Column("DonGia", "Giá"),
+            webGrid.Column("SoLuongTon", "Số Lượng"),
+            webGrid.Column(format: p => Html.ActionLink("Nhập hàng", "NhapHangDon", new { id = p.MaSP }))
+        )
+    )
+    <style>
+        .gridTable {
+            border: 2px solid #808080;
+            width: 100%;
+        }
+
+
+        .gridHead {
+            background-color: chocolate;
+        }
+
+            .gridHead > th > a {
+                color: aliceblue
+            }
+
+        .gridFooter {
+            font-weight: bold
+        }
+
+        .gridRow {
+            border-bottom: 2px solid #808080;
+        }
+    </style>
+</section>

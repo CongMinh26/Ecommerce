@@ -1,0 +1,99 @@
+﻿
+@using Ecommerce.Models
+@model SanPham
+@{
+    ViewBag.Title = "NhapHangDon";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<section class="wrapper">
+    <h3>Nhập hàng </h3>
+    <br />
+    <div class="col-md-9 product-price1">
+        <div class="col-md-5 single-top">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li data-thumb="@Url.Content("~/Content/images/"+Model.HinhAnh)">
+                        <img src="@Url.Content("~/Content/images/"+Model.HinhAnh)" />
+                    </li>
+                </ul>
+            </div>
+            <!-- FlexSlider -->
+            <script defer src="~/Content/js/jquery.flexslider.js"></script>
+            <link rel="stylesheet" href="~/Content/css/flexslider.css" type="text/css" media="screen" />
+
+            <script>
+                // Can also be used with $(document).ready()
+                $(window).load(function () {
+                    $('.flexslider').flexslider({
+                        animation: "slide",
+                        controlNav: "thumbnails"
+                    });
+                });
+            </script>
+        </div>
+        <div class="col-md-7 single-top-in simpleCart_shelfItem">
+            <div class="single-para ">
+                <h4>@Model.TenSP</h4>
+                <br />
+
+                <h5 class="item_price">Đơn giá: @Model.DonGia VND</h5>
+                <p>
+                    Cấu hình: @Model.CauHinh
+                </p>
+                <p>
+                    Số lượng tồn: @Model.SoLuongTon
+                </p>
+                <div class="available">
+                    <ul style="list-style: none">
+                        <li>
+                            Màu Sắc
+                            <select>
+                                <option>Trắng</option>
+                                <option>Đen</option>
+                                <option>Xanh</option>
+                                <option>Đỏ</option>
+                            </select>
+                        </li>
+                        <li>
+                            Chọn bộ nhớ
+                            <select>
+                                <option>64GB</option>
+                                <option>128GB</option>
+                                <option>256GB</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+        <!---->
+
+    </div>
+
+    <br />
+    @using (Html.BeginForm("NhapHangDon", "QuanLyPhieuNhap", FormMethod.Post))
+    {
+        @Html.Hidden("MaSP", Model.MaSP);
+<div class="row">
+    <div class="col" >
+        @{ var listNCC = (SelectList)ViewBag.MaNCC;}
+        <span>Nhà cung cấp:</span> @Html.DropDownList("MaNCC", listNCC, new { @class = "MaNCC" })
+    </div>
+    <div class="col">
+        <span>Số lượng nhập:</span> @Html.TextBox("SoLuongNhap")
+    </div>
+    <div class="col">
+        <span> Đơn giá nhập:</span>  @Html.TextBox("DonGiaNhap")
+    </div>
+    <div class="col">
+        <input type="submit" value="Nhập hàng" class="btn btn-success" id="btnNhaphang" />
+    </div>
+    </div>
+    }
+
+</section>
+

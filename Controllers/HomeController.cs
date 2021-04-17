@@ -17,16 +17,16 @@ namespace Ecommerce.Controllers
         {
             // Lấy dữ liệu gán cho viewbag.
             // Lấy list điện thoại mới nhất
-            var ldt = db.SanPham.Where(n => n.MaLoaiSP == 2 && n.Moi == 1 && n.DaXoa == false);
-            ViewBag.ListDT = ldt;
+            ViewBag.ListDT = db.SanPham.Where(n => n.MaLoaiSP == 2 && n.Moi == 1 && n.DaXoa == false);
+        
 
             // Lấy list LapTop mới nhất
-            var llt = db.SanPham.Where(n => n.MaLoaiSP == 1 && n.Moi == 1 && n.DaXoa == false);
-            ViewBag.ListLT = llt;
+            ViewBag.ListLT = db.SanPham.Where(n => n.MaLoaiSP == 1 && n.Moi == 1 && n.DaXoa == false);
+             
 
             // Lấy list PC mới nhất
-            var lpc = db.SanPham.Where(n => n.MaLoaiSP == 3 && n.Moi == 1 && n.DaXoa == false);
-            ViewBag.ListPC = lpc;
+           /* var lpc = db.SanPham.Where(n => n.MaLoaiSP == 2 && n.Moi == 1 && n.DaXoa == false);
+            ViewBag.ListPC = lpc;*/
             return View();
         }
 
