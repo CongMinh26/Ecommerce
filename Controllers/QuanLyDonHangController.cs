@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Net.Mail;
 
 namespace Ecommerce.Controllers
 {
@@ -61,6 +62,38 @@ namespace Ecommerce.Controllers
             var listCTDDH = db.ChiTietDonDatHang.Where(n => n.MaDDH == ddh.MaDDH);
             ViewBag.ListChiTietDH = listCTDDH;
             return View(ddhUpdate);
+        }
+
+       // phương thức gửi mail
+        public void GuiMail(string title, string ToEmail, string FromEmail, string Pass,string Content)
+        {
+            MailMessage mail = new MailMessage();
+            mail.To.Add(ToEmail);
+            mail.From = new MailAddress(ToEmail);
+            mail.Subject = title;
+            mail.Body = Content;
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com"; // host gửi của Gmail
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential(FromEmail, Pass);
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+        }
+        // giải phòng vùng nhớ, biến nào ko dùng thì ...
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (db != null)
+                {
+                    db.Dispose();
+
+                }
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

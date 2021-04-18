@@ -42,12 +42,14 @@
 
 
 
-    <div class="divDanghang" style="text-align:right">
-        @using(Html.BeginForm("DatHang","GioHang"))
-         {
-            <input type="submit" value="Đặt Hàng" class="btn btn-danger"/>
-            @Html.ActionLink("Mua tiếp", "Index", "Home", new { @class ="btn btn-success"});
-         }
-  </div>
+<div class="divDanghang" style="text-align:right">
+    @using (Html.BeginForm("DatHang", "GioHang"))
+    {
+            <input type="submit" value="Đặt Hàng" class="btn btn-danger" />
+            @Html.ActionLink("Mua tiếp", "Index", "Home", new { @class = "btn btn-success" });
+        
+
+    }
+</div>
 
     </div>

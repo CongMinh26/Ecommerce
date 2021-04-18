@@ -72,5 +72,19 @@ namespace Ecommerce.Controllers
 
             return View(list_sp.OrderBy(n=>n.MaSP).ToPagedList(pageNumber, pageSize));
         }
+        // giải phòng vùng nhớ, biến nào ko dùng thì ...
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (db != null)
+                {
+                    db.Dispose();
+
+                }
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

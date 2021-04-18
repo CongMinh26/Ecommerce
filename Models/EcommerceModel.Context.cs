@@ -37,5 +37,7 @@ namespace Ecommerce.Models
         public virtual DbSet<PhieuNhap> PhieuNhap { get; set; }
         public virtual DbSet<SanPham> SanPham { get; set; }
         public virtual DbSet<ThanhVien> ThanhVien { get; set; }
+        public virtual DbSet<LoaiThanhVien_Quyen> LoaiThanhVien_Quyen { get; set; }
+        public virtual DbSet<Quyen> Quyen { get; set; }
     }
 }

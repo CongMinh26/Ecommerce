@@ -147,6 +147,7 @@
     <Compile Include="Controllers\QuanLyPhieuNhapController.cs" />
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
+    <Compile Include="Controllers\ThongKeController.cs" />
     <Compile Include="Controllers\TimKiemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,6 +189,9 @@
     <Compile Include="Models\LoaiThanhVien.cs">
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoaiThanhVien_Quyen.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NhaCungCap.cs">
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
@@ -195,6 +199,9 @@
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhieuNhap.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Quyen.cs">
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SanPham.cs">
@@ -487,6 +494,7 @@
     <Content Include="Views\QuanLyDonHang\ChuaGiao.cshtml" />
     <Content Include="Views\QuanLyDonHang\DaGiaoDaThanhToan.cshtml" />
     <Content Include="Views\QuanLyDonHang\DuyetDonHang.cshtml" />
+    <Content Include="Views\ThongKe\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Content\tinymce\js\tinymce\tinymce.d.ts" />
