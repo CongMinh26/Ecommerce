@@ -37,5 +37,19 @@ namespace Ecommerce.Controllers
             // gọi đến action KetQuaTimKiem 
             return RedirectToAction("KetQuaTimKiem", new { @TuKhoa = TuKhoa});
         }
+        // giải phòng vùng nhớ, biến nào ko dùng thì ...
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (db != null)
+                {
+                    db.Dispose();
+
+                }
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

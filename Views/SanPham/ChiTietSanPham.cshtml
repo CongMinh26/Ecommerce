@@ -81,7 +81,7 @@ $(window).load(function() {
                 </ul>
             </div>
            
-            <a href="#" class="add-cart item_add">Thêm Giỏ Hàng</a>
+            <a href="@Url.Action("ThemGioHang", "GioHang", new { @MaSp = Model.MaSP, @url = Request.Url.ToString()})" class="add-cart item_add">Thêm Giỏ Hàng</a>
 
             <h3>Thông tin chi tiết</h3>
             <hr />

@@ -16,8 +16,21 @@ namespace Ecommerce.Controllers
             var listkh = db.KhachHang;
             return View(listkh);
         }
+        // giải phòng vùng nhớ, biến nào ko dùng thì ...
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (db != null)
+                {
+                    db.Dispose();
 
-       
+                }
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 
 }
